@@ -1,0 +1,173 @@
+:root {
+    --background-color: rgb(113, 192, 146);
+    --button-background-color: #44e05b;
+    --button-hover-background-color: #000000;
+    --button-hover-background2-color: #ffffff;
+    --button-text-color: #000000; /* Cambiado a negro */
+    --button-padding: 15px 32px;
+    --button-font-size: 16px;
+    --button-border-radius: 4px;
+    --button-border: none;
+    --button-transition: background-color 0.3s ease;
+    --button-animation-duration: 1s;
+    --font-family: 'Fugaz One', sans-serif; /* Nueva variable para la fuente */
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family); /* Aplicar la nueva fuente a todo el documento */
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.sec1::before,
+.sec2::before,
+.sec3::before,
+.sec4::before,
+.sec5::before,
+.sec6::before,
+.sec7::before,
+.sec8::before,
+.sec9::before,
+.sec10::before {
+    content: "";
+    background-position: center;
+    background-size: contain; /* Cambiado a contain para ajustar todas las imágenes al tamaño de la primera */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Especificar las imágenes de fondo para cada sección */
+.sec1::before {
+    background-image: url('/img/Pino0.png');
+}
+
+.sec2::before {
+    background-image: url('/img/Pino1.png');
+}
+
+.sec3::before {
+    background-image: url('/img/Pino2.png');
+}
+
+.sec4::before {
+    background-image: url('/img/Pino3.png');
+}
+
+.sec5::before {
+    background-image: url('/img/Pino4.png');
+}
+
+.sec6::before {
+    background-image: url('/img/Pino5.png');
+}
+
+.sec7::before {
+    background-image: url('/img/Pino6.png');
+}
+
+.sec8::before {
+    background-image: url('/img/Pino7.png');
+}
+
+.sec9::before {
+    background-image: url('/img/Pino8.png');
+}
+
+.sec10::before {
+    background-image: url('/img/Pino9.png');
+}
+
+.contain {
+    width: 100%;
+    height: 170px;
+    background-image: url('/img/textura.jpg');
+    text-align: center;
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    border: 2px solid #000000; /* Añade un borde negro */
+}
+
+.contain p {
+    font-size: 2.5rem;
+    line-height: normal; /* Asegura que el line-height no interfiera */
+}
+
+/* Estilos para el contenedor del botón */
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    background-image: url('/img/textura.jpg');
+    border-top: 2px solid #000000; /* Añadir un borde superior */
+}
+
+/* Animación para el botón */
+@keyframes pulseAnimation {
+    0% {
+        transform: scale(1); /* Escala normal */
+    }
+    50% {
+        transform: scale(1.1); /* Escala aumentada al 110% */
+    }
+    100% {
+        transform: scale(1); /* Vuelve a la escala normal */
+    }
+}
+
+/* Estilos para el botón */
+.view-seasons-button {
+    background-color: var(--button-background-color); /* Color de fondo */
+    color: var(--button-text-color); /* Color del texto */
+    padding: var(--button-padding); /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Mostrar como bloque en línea */
+    font-size: var(--button-font-size); /* Tamaño de fuente */
+    margin: 4px 2px; /* Margen */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    border: var(--button-border); /* Sin borde */
+    border-radius: var(--button-border-radius); /* Bordes redondeados */
+    transition: var(--button-transition); /* Transición para el cambio de color de fondo */
+    animation: pulseAnimation var(--button-animation-duration) infinite; /* Aplicar la animación de pulsación */
+}
+
+/* Efecto al pasar el mouse por encima del botón */
+.view-seasons-button:hover {
+    background-color: var(--button-hover-background-color);
+    color: var(--button-hover-background2-color);
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+    
+    section {
+        height: auto;
+        min-height: 300px; /* Altura mínima para las secciones */
+    }
+}

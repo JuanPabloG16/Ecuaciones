@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+  <link rel="stylesheet" href="/Estilos/Quiz.css">
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz</h1>
+    <div id="question1" class="question">
+      <p>Pregunta 1: Cuántos árboles se mostraron?</p>
+      <ul>
+        <li><input type="radio" name="question1" value="A"> A) 4</li>
+        <li><input type="radio" name="question1" value="B"> B) 5</li>
+        <li><input type="radio" name="question1" value="C"> C) 3</li>
+        <li><input type="radio" name="question1" value="D"> D) 6</li>
+      </ul>
+      <button class="verify-button" onclick="checkAnswer('question1')">Verificar</button>
+    </div>
+    <div id="question2" class="question locked">
+      <p>Pregunta 2: Cuáles árboles se mostraron?</p>
+      <ul>
+        <li><input type="radio" name="question2" value="A"> A) Pino, Roble, Sauces, Encinos</li>
+        <li><input type="radio" name="question2" value="B"> B) Roble, Secuoya, Pino, Abeto</li>
+        <li><input type="radio" name="question2" value="C"> C) Secuoya, Pino, Abeto, Nogales</li>
+        <li><input type="radio" name="question2" value="D"> D) Bonsai, Sauces, Roble, Abeto</li>
+      </ul>
+      <button class="verify-button" onclick="checkAnswer('question2')">Verificar</button>
+    </div>
+    <div id="question3" class="question locked">
+      <p>Pregunta 3: Que tipo de árbol no se observó?</p>
+      <ul>
+        <li><input type="radio" name="question3" value="A"> A) Roble</li>
+        <li><input type="radio" name="question3" value="B"> B) Abeto</li>
+        <li><input type="radio" name="question3" value="C"> C) Hyperion</li>
+        <li><input type="radio" name="question3" value="D"> D) Pino</li>
+      </ul>
+      <button class="verify-button" onclick="checkAnswer('question3')">Verificar</button>
+    </div>
+    <div id="result-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p id="result-message"></p>
+      </div>
+    </div>
+    <button class="return-button" onclick="returnToHomePage()">Volver a la página inicial</button>
+  </div>
+  
+  <script src="/js/Quiz.js"></script>
+</body>
+</html>

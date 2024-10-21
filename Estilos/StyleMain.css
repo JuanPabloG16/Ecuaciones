@@ -1,0 +1,132 @@
+/* Variables */
+:root {
+    --font-family: 'Fugaz One', sans-serif;
+    --text-color: #000000;
+    --title-color: #ffffff;
+    --fondo-opciones: #ffffff83;
+    --box-border: #0044ff;
+    --bubble-size: 69px;
+    --bubble-color-odd: #979797af;
+    --bubble-color-even: #ffffffc9;
+    --bubble-animation-duration: 125s;
+}
+
+/* Estilos generales y de la cuadrícula */
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background-image: url('/img/Fondo2.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Cubre todo el fondo */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+h1 {
+    margin-top: 150px;
+    color: var(--title-color);
+    font-size: 2em;
+    text-align: center;
+}
+
+.content {
+    position: relative;
+    display: flex;
+    bottom: 250px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; /* Espacio entre los elementos de la cuadrícula */
+    width: 80%;
+    max-width: 800px;
+}
+
+.grid-item, .grid-item a:visited {
+    background-color: var(--fondo-opciones);
+    border: 2px solid var(--box-border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    text-decoration: none;
+    color: inherit; /* Hereda el color del texto de su contenedor padre */
+}
+
+.grid-item:hover {
+    transform: translateY(-5px); /* Efecto de elevarse al pasar el cursor */
+    background-color: #f0f8f0; /* Cambio de color de fondo al pasar el cursor */
+}
+
+.grid-item:active {
+    transform: translateY(2px); /* Efecto de presionar al hacer clic */
+    background-color: #e0ffe0; /* Color de fondo al hacer clic */
+}
+
+/* Estilos para el efecto de burbujas */
+.bubbles {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.bubbles span {
+    position: relative;
+    width: var(--bubble-size);
+    height: var(--bubble-size);
+    background: var(--bubble-color-odd);
+    margin: 0 1px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #fbffda, 0 0 50px #fbffda, 0 0 100px #fbffda;
+    animation: animate var(--bubble-animation-duration) linear infinite;
+    animation-duration: calc(var(--bubble-animation-duration) / var(--i));
+}
+
+.bubbles span:nth-child(even) {
+    background: var(--bubble-color-even);
+    box-shadow: 0 0 0 10px #979797, 0 0 50px #fbffda, 0 0 100px #fbffda;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(100vh) scale(0);
+    }
+    100% {
+        transform: translateY(-100vh) scale(1);
+    }
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1px; /* Cambiado a 10px para hacerlo más delgado */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+    
+    section {
+        height: auto;
+        min-height: 300px; /* Altura mínima para las secciones */
+    }
+}
