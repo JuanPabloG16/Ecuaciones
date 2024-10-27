@@ -57,45 +57,45 @@ section {
 
 /* Especificar las imágenes de fondo para cada sección */
 .sec1::before {
-    background-image: url('/img/Abeto0.png');
+    background-image: url('../img/Abeto0.png');
 }
 
 .sec2::before {
-    background-image: url('/img/Abeto1.png');
+    background-image: url('../img/Abeto1.png');
 }
 
 .sec3::before {
-    background-image: url('/img/Abeto2.png');
+    background-image: url('../img/Abeto2.png');
 }
 
 .sec4::before {
-    background-image: url('/img/Abeto3.png');
+    background-image: url('../img/Abeto3.png');
 }
 
 .sec5::before {
-    background-image: url('/img/Abeto4.png');
+    background-image: url('../img/Abeto4.png');
 }
 
 .sec6::before {
-    background-image: url('/img/Abeto5.jpg');
+    background-image: url('../img/Abeto5.jpg');
 }
 
 .sec7::before {
-    background-image: url('/img/Abeto6.png');
+    background-image: url('../img/Abeto6.png');
 }
 
 .sec8::before {
-    background-image: url('/img/Abeto7.png');
+    background-image: url('../img/Abeto7.png');
 }
 
 .sec9::before {
-    background-image: url('/img/Abeto8.png');
+    background-image: url('../img/Abeto8.png');
 }
 
 .contain {
     width: 100%;
     height: 170px;
-    background-image: url(/img/textura.jpg);
+    background-image: url(../img/textura.jpg);
     text-align: center;
     display: flex;
     align-items: center; /* Centra verticalmente */
@@ -115,7 +115,7 @@ section {
     justify-content: center;
     align-items: center;
     padding: 20px 0;
-    background-image: url(/img/textura.jpg);
+    background-image: url(../img/textura.jpg);
     border-top: 2px solid #000000; /* Añadir un borde superior */
 }
 

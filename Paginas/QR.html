@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escanea y Descubre Árboles 3D</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
+        /* Variables de color */
+        :root {
+            --primary-color: #3C8A4D; /* Verde bosque */
+            --secondary-color: #A8D8B9; /* Verde suave */
+            --text-color: #6B4B3A; /* Marrón tierra */
+            --background-color: #EAE1D1; /* Fondo claro tono café */
+            --card-background: rgba(255, 255, 255, 0.8); /* Fondo de las tarjetas */
+            --hover-color: #A2DFF7; /* Azul claro al pasar */
+            --border-color: #cbd5e0; /* Color de borde */
+            --shadow-color: rgba(0, 0, 0, 0.15); /* Sombra de elementos */
+            --title-font: 'Merriweather', serif; /* Fuente más formal para títulos */
+            --body-font: 'Inter', sans-serif; /* Fuente legible para cuerpo */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: var(--title-font);
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .qr-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .qr-box {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            padding: 20px;
+            width: 200px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .qr-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .qr-box h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .qr-box p {
+            font-size: 0.9em;
+            opacity: 0.8;
+            color: var(--text-color);
+        }
+
+        .back-button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .back-button:hover {
+            background-color: var(--hover-color);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .qr-box {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Descubre Árboles en 3D</h1>
+        <div class="qr-container">
+            <div class="qr-box">
+                <img src="../QR/1.png" alt="QR Código para Árbol 1">
+                <h2>Árbol de free3d</h2>
+                <p>Revisa todos sus detalles</p>
+            </div>
+            <div class="qr-box">
+                <img src="../QR/2.png" alt="QR Código para Árbol 2">
+                <h2>Árbol Threegen.io</h2>
+                <p>Revisa todos sus detalles</p>
+            </div>
+        </div>
+        <div class="back-button-container">
+            <button onclick="window.location.href = 'Inicial.html';" class="back-button">Regresar a Inicio</button>
+        </div>
+    </div>
+</body>
+</html>

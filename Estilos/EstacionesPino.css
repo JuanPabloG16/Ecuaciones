@@ -52,25 +52,25 @@ section {
 
 /* Especificar las imágenes de fondo para cada sección */
 .sec1::before {
-    background-image: url('/img/PinoPrimavera.png');
+    background-image: url('../img/PinoPrimavera.png');
 }
 
 .sec2::before {
-    background-image: url('/img/Pinootono.png');
+    background-image: url('../img/Pinootono.png');
 }
 
 .sec3::before {
-    background-image: url('/img/PinoVerano.png');
+    background-image: url('../img/PinoVerano.png');
 }
 
 .sec4::before {
-    background-image: url('/img/PinoInvierno.png');
+    background-image: url('../img/PinoInvierno.png');
 }
 
 .contain {
     width: 100%;
     height: 170px;
-    background-image: url(/img/textura.jpg);
+    background-image: url(../img/textura.jpg);
     text-align: center;
     display: flex;
     align-items: center; /* Centra verticalmente */
@@ -90,7 +90,7 @@ section {
     justify-content: center;
     align-items: center;
     padding: 20px 0;
-    background-image: url(/img/textura.jpg);
+    background-image: url(../img/textura.jpg);
     border-top: 2px solid #000000; /* Añadir un borde superior */
 }
 

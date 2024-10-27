@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TreeGen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            padding: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .logo svg {
+            margin-right: 0.5rem;
+        }
+        nav a {
+            margin-left: 1rem;
+            text-decoration: none;
+            color: #333;
+        }
+        main {
+            display: flex;
+            padding: 2rem;
+        }
+        .canvas-container {
+            flex-grow: 1;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-right: 2rem;
+        }
+        #treeCanvas {
+            width: 100%;
+            height: 100%;
+        }
+        .controls {
+            width: 300px;
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 0.5rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="3" x2="6" y2="15"></line>
+                    <circle cx="18" cy="6" r="3"></circle>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <path d="M18 9a9 9 0 0 1-9 9"></path>
+                </svg>
+                TreeGen
+            </div>
+            <nav>
+                <a href="#">About</a>
+                <a href="#">Gallery</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="canvas-container">
+            <canvas id="treeCanvas"></canvas>
+        </div>
+        <div class="controls">
+            <h2>Customize Your Tree</h2>
+            <label for="treeSize">Tree Size</label>
+            <input type="range" id="treeSize" min="1" max="100" value="50">
+            
+            <label for="branchDensity">Branch Density</label>
+            <input type="range" id="branchDensity" min="1" max="100" value="50">
+            
+            <label for="leafDensity">Leaf Density</label>
+            <input type="range" id="leafDensity" min="1" max="100" value="50">
+            
+            <button id="generateTree">Generate Tree</button>
+            
+            <button id="randomTree">Random Tree</button>
+        </div>
+    </main>
+    <footer>
+        <div class="back-button-container">
+            <button onclick="window.location.href = 'Inicial.html';" class="back-button">Regresar a Inicio</button>
+        </div>
+    </footer>
+    <script>
+        const canvas = document.getElementById('treeCanvas');
+        const ctx = canvas.getContext('2d');
+        const generateButton = document.getElementById('generateTree');
+        const randomButton = document.getElementById('randomTree');
+        const treeSizeSlider = document.getElementById('treeSize');
+        const branchDensitySlider = document.getElementById('branchDensity');
+        const leafDensitySlider = document.getElementById('leafDensity');
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function drawTree(startX, startY, len, angle, branchWidth, color1, color2) {
+            ctx.beginPath();
+            ctx.save();
+            ctx.strokeStyle = color1;
+            ctx.fillStyle = color2;
+            ctx.lineWidth = branchWidth;
+            ctx.translate(startX, startY);
+            ctx.rotate(angle * Math.PI / 180);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -len);
+            ctx.stroke();
+
+            if (len < 10) {
+                ctx.beginPath();
+                ctx.arc(0, -len, 10, 0, Math.PI / 2);
+                ctx.fill();
+                ctx.restore();
+                return;
+            }
+
+            drawTree(0, -len, len * 0.8, angle - 15, branchWidth * 0.8, color1, color2);
+            drawTree(0, -len, len * 0.8, angle + 15, branchWidth * 0.8, color1, color2);
+
+            ctx.restore();
+        }
+
+        function generateTree() {
+            const treeSize = treeSizeSlider.value;
+            const branchDensity = branchDensitySlider.value;
+            const leafDensity = leafDensitySlider.value;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawTree(canvas.width / 2, canvas.height - 50, treeSize * 2, 0, branchDensity / 10, 'brown', `rgb(0, ${leafDensity * 2 + 50}, 0)`);
+        }
+
+        function randomizeTree() {
+            treeSizeSlider.value = Math.floor(Math.random() * 100) + 1;
+            branchDensitySlider.value = Math.floor(Math.random() * 100) + 1;
+            leafDensitySlider.value = Math.floor(Math.random() * 100) + 1;
+            generateTree();
+        }
+
+        generateButton.addEventListener('click', generateTree);
+        randomButton.addEventListener('click', randomizeTree);
+        treeSizeSlider.addEventListener('input', generateTree);
+        branchDensitySlider.addEventListener('input', generateTree);
+        leafDensitySlider.addEventListener('input', generateTree);
+
+        generateTree();
+    </script>
+</body>
+</html>

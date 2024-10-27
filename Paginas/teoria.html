@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecuación Diferencial del Crecimiento del Pino</title>
+    <link rel="stylesheet" href="../css/teoria.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Ecuación Diferencial del Crecimiento del Pino</h1>
+        <p>Un estudio sobre ecuaciones diferenciales aplicadas al crecimiento de árboles</p>
+    </header>
+
+    <div class="container">
+        <div class="tab-container">
+            <button class="tab active" onclick="openTab(event, 'ecuacion')">Ecuación Diferencial</button>
+            <button class="tab" onclick="openTab(event, 'aplicacion')">Aplicación al Pino</button>
+        </div>
+
+        <div id="ecuacion" class="content active">
+            <section class="section">
+                <h2>Ecuación Diferencial del Modelo</h2>
+                <div class="equation">
+                    \[\frac{dh}{dt} = k(1 - \frac{h}{H})\]
+                </div>
+                <p>Donde:</p>
+                <ul>
+                    <li><strong>h</strong>: altura del arbol</li>
+                    <li><strong>t</strong>: tiempo en años</li>
+                    <li><strong>H</strong>: altura máxima del arbol ( ejemplo pino 30 metros)</li>
+                    <li><strong>k</strong>: constante de crecimiento del arbol  (ejemplo pino 0.5 metros/año)</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Resolución Paso a Paso</h2>
+                <ol class="steps">
+                    <li>
+                        <h3>Separación de Variables</h3>
+                        <div class="equation">
+                            \[\frac{dh}{1 - h/H} = kdt\]
+                        </div>
+                        <p>Reorganizamos la ecuación para separar h y t.</p>
+                    </li>
+                    <li>
+                        <h3>Simplificación</h3>
+                        <div class="equation">
+                            \[\frac{dh}{1 - h/H} = \frac{Hdh}{H - h}\]
+                        </div>
+                        <div class="equation">
+                            \[\frac{H}{H - h}dh = kdt\]
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Integración</h3>
+                        <div class="equation">
+                            \[\int \frac{H}{H-h} dh = \int kdt\]
+                        </div>
+                        <div class="equation">
+                            \[-H \ln|H - h| = kt + C\]
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Manipulación</h3>
+                        <div class="equation">
+                            \[\ln|H - h| = -\frac{kt}{H} + C\]
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Exponenciación</h3>
+                        <div class="equation">
+                            \[H - h = e^{-kt/H} \cdot e^C\]
+                        </div>
+                        <div class="equation">
+                            \[H - h = Ce^{-kt/H}\]
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Expresar en términos de condiciones iniciales</h3>
+                        <div class="equation">
+                            \[h(0) = H - C\]
+                        </div>
+                        <div class="equation">
+                            \[C = H - h_0\]
+                        </div>
+                        <p>Donde $$h_0$$ es la altura inicial del árbol.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="section final-solution">
+                <h2>Solución Final</h2>
+                <div class="equation">
+                    \[h(t) = H - (H - h_0)e^{-kt/H}\]
+                </div>
+                <div class="equation">
+                    \[h = H(1 - Ce^{-kt/H})\]
+                </div>
+                <p>Donde C es una constante que depende de la altura inicial del árbol.</p>
+            </section>
+
+            <section class="section">
+                <div class="note">
+                    <p><strong>Nota:</strong> Esta ecuación diferencial es un modelo común en diversos fenómenos físicos y naturales, como el enfriamiento de objetos o el crecimiento poblacional.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="aplicacion" class="content">
+            <section class="section">
+                <h2>Aplicación al Crecimiento del Pino</h2>
+                <p>Utilizando la ecuación diferencial que hemos resuelto, podemos modelar el crecimiento de un pino a lo largo del tiempo. Este modelo considera que:</p>
+                <ul>
+                    <li>Existe una altura máxima que el pino puede alcanzar (H = 30 metros)</li>
+                    <li>La velocidad de crecimiento es proporcional a la diferencia entre la altura actual y la altura máxima</li>
+                    <li>El crecimiento es más rápido al principio y se desacelera conforme el árbol se acerca a su altura máxima</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Simulación Interactiva</h2>
+                <p>Ajusta los parámetros para ver cómo crece el pino según nuestro modelo:</p>
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="initialHeight">Altura Inicial (metros):</label>
+                        <input type="range" id="initialHeight" min="0.1" max="10" step="0.1" value="1">
+                        <span id="initialHeightValue">1 m</span>
+                    </div>
+                    <div class="control-group">
+                        <label for="years">Años a simular:</label>
+                        <input type="range" id="years" min="10" max="200" step="10" value="100">
+                        <span id="yearsValue">100 años</span>
+                    </div>
+                </div>
+                <div class="graph-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Interpretación de Resultados</h2>
+                <p>El gráfico muestra cómo la altura del pino cambia con el tiempo según nuestro modelo. Observa que:</p>
+                <ul>
+                    <li>El crecimiento es más rápido en los primeros años</li>
+                    <li>A medida que el árbol se acerca a su altura máxima, el crecimiento se desacelera</li>
+                    <li>La altura final se aproxima asintóticamente a la altura máxima de 30 metros</li>
+                </ul>
+                <p>Este modelo proporciona una buena aproximación del crecimiento de un pino en condiciones ideales, aunque en la realidad, factores como el clima, el suelo y la competencia con otros árboles pueden afectar el crecimiento.</p>
+            </section>
+        </div>
+    </div>
+    <footer>
+        <div class="back-button-container">
+            <button onclick="window.location.href = 'Inicial.html';" class="back-button">Regresar a Inicio</button>
+        </div>
+    </footer>
+    <script src="../js/teoria.js"></script>
+</body>
+</html>

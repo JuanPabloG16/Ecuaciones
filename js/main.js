@@ -21,15 +21,15 @@ let object;
 // OrbitControls allow the camera to move around the scene
 let controls;
 
-// Set which object to render
-let objToRender = 'eye';
+// Set which object to render ('eye' or 'dino')
+let objToRender = 'eye';  // Puede ser 'eye' o 'dino'
 
 // Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
 
-// Load the file
+// Load the file depending on the object to render
 loader.load(
-  `Models/${objToRender}/scene.gltf`,
+  `./models/${objToRender}/scene.gltf`,  // Ajustada la ruta aquí
   function (gltf) {
     // If the file is loaded, add it to the scene
     object = gltf.scene;
@@ -56,7 +56,6 @@ loader.load(
     console.error(error);
   }
 );
-
 
 // Instantiate a new renderer and set its size
 const renderer = new THREE.WebGLRenderer({ alpha: true }); // Alpha: true allows for the transparent background
@@ -99,14 +98,13 @@ document.addEventListener('mousemove', function(event) {
 // Render the scene
 function animate() {
   requestAnimationFrame(animate);
-  // Here we could add some code to update the scene, adding some automatic movement
 
   // Make the eye move only when the mouse button is pressed
   if (object && objToRender === "eye" && mousePressed) {
-    // I've played with the constants here until it looked good 
     object.rotation.y = -3 + mouseX / window.innerWidth * 3;
     object.rotation.x = -1.2 + mouseY * 2.5 / window.innerHeight;
   }
+
   renderer.render(scene, camera);
 }
 
@@ -119,3 +117,4 @@ window.addEventListener("resize", function () {
 
 // Start the 3D rendering
 animate();
+

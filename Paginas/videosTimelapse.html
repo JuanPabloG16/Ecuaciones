@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timelapse del Crecimiento de Árboles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f0;
+        }
+        .timelapse-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: linear-gradient(to right, #e6f7e6, #c1e8c1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c5e2c;
+            padding: 1rem 0;
+            font-size: 1.8rem;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+        .video-controls button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background-color: #4CAF50;
+            margin: 0 5px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .video-controls button.active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        .video-title {
+            text-align: center;
+            color: #2c5e2c;
+            font-size: 1.2rem;
+            padding: 0.5rem 0;
+            font-weight: bold;
+        }
+        footer {
+    background-color: #3C8A4D; /* Fondo verde oscuro */
+    padding: 1.5rem 0; /* Espaciado en el footer */
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.back-button-container {
+    display: inline-block;
+}
+
+.back-button {
+    background-color: #ffffff; /* Fondo blanco */
+    color: #3C8A4D; /* Texto verde oscuro */
+    padding: 0.75rem 1.5rem; /* Espaciado interno */
+    border: 2px solid #3C8A4D; /* Borde verde oscuro */
+    border-radius: 50px; /* Bordes redondeados */
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.back-button:hover {
+    background-color: #3C8A4D; /* Fondo verde oscuro al hacer hover */
+    color: #ffffff; /* Texto blanco al hacer hover */
+    transform: scale(1.05); /* Efecto de agrandado suave */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.back-button:active {
+    transform: scale(0.95); /* Efecto al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra reducida al hacer clic */
+}
+
+    </style>
+</head>
+<body>
+    <div class="timelapse-container">
+        <h1>Timelapse del Crecimiento de Árboles</h1>
+        <div class="video-wrapper">
+            <iframe id="treeVideo" src="https://www.youtube.com/embed/c6nHXFvwQM4?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=c6nHXFvwQM4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="video-title" id="videoTitle">Crecimiento de un Árbol </div>
+        <div class="video-controls">
+            <button class="active" onclick="changeVideo(0)"></button>
+            <button onclick="changeVideo(1)"></button>
+            <button onclick="changeVideo(2)"></button>
+        </div>
+        
+    </div>
+    <footer>
+        <div class="back-button-container">
+            <button onclick="window.location.href = 'Inicial.html';" class="back-button">Regresar a Inicio</button>
+        </div>
+    </footer>
+    <script>
+        const iframe = document.getElementById('treeVideo');
+        const videoTitle = document.getElementById('videoTitle');
+        const buttons = document.querySelectorAll('.video-controls button');
+        const videos = [
+            {id: 'c6nHXFvwQM4', title: 'Crecimiento de un Árbol '},
+            {id: 'yxamDPX1Lys', title: 'Video de 25 dias'},
+            {id: 'o1V81OxJeo8', title: 'Crecimiento de un Árbol animacion'}
+        ];
+
+        function changeVideo(index) {
+            const video = videos[index];
+            iframe.src = `https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${video.id}`;
+            videoTitle.textContent = video.title;
+            buttons.forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+        }
+
+        // Intersection Observer para reproducir/pausar el video cuando está en vista
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                } else {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(iframe);
+    </script>
+</body>
+</html>

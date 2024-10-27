@@ -1,0 +1,295 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    height: 100vh;
+}
+
+#canvas-container {
+    flex: 1;
+    position: relative;
+    height: 100vh;
+}
+
+#controls {
+    width: 300px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 100;
+    height: 100vh;
+}
+
+#info-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 250px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    height: 5px;
+    -webkit-appearance: none;
+    background: #e0e0e0;
+    outline: none;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #3498db;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb:hover {
+    background: #2980b9;
+}
+
+#info {
+    background-color: #f7f9fc;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+#info p {
+    margin: 10px 0;
+    color: #2c3e50;
+    font-size: 0.95em;
+}
+
+#info span {
+    font-weight: bold;
+    color: #3498db;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #3498db;
+    color: white;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.back-button {
+    background-color: #95a5a6;
+}
+
+.back-button:hover {
+    background-color: #7f8c8d;
+}
+
+.value-display {
+    display: inline-block;
+    min-width: 45px;
+    text-align: right;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: help;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #34495e;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Asegurar que el canvas se ajuste correctamente */
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    
+    #canvas-container {
+        height: 70vh;
+    }
+    
+    #controls {
+        width: 100%;
+        height: auto;
+        max-height: 30vh;
+        padding: 10px;
+        overflow-y: auto;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    
+    #info-panel {
+        bottom: calc(30vh + 10px);
+        right: 10px;
+        width: auto;
+        max-width: calc(100% - 20px);
+    }
+    
+    button {
+        margin-bottom: 5px;
+        padding: 8px;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    label {
+        font-size: 0.9rem;
+    }
+    
+    input[type="range"] {
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #canvas-container {
+        height: 60vh;
+    }
+    
+    #controls {
+        max-height: 40vh;
+    }
+    
+    #info-panel {
+        bottom: calc(40vh + 10px);
+        right: 5px;
+        left: 5px;
+        width: auto;
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    
+    button {
+        font-size: 0.9rem;
+        padding: 6px;
+    }
+
+    .value-display {
+        min-width: 35px;
+        font-size: 0.9rem;
+    }
+
+    .tooltip .tooltip-text {
+        width: 160px;
+        font-size: 0.8rem;
+        padding: 4px;
+    }
+}
+
+/* Soporte para dispositivos en modo paisaje */
+@media (max-width: 768px) and (orientation: landscape) {
+    #canvas-container {
+        height: 60vh;
+    }
+    
+    #controls {
+        max-height: 40vh;
+    }
+    
+    #info-panel {
+        bottom: calc(40vh + 10px);
+    }
+    
+    button {
+        display: inline-block;
+        width: calc(50% - 5px);
+        margin-right: 5px;
+    }
+    
+    button:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+/* Mejoras de accesibilidad para inputs */
+input[type="range"]:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+button:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+
+
+
+

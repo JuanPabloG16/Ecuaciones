@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Crecimiento Natural</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="stylesheet" href="../css/timelaps.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Simulación de Crecimiento Natural</h1>
+        </header>
+
+        <div class="equation-display">
+            <div>Ecuación de crecimiento:</div>
+            \[h = H(1 - Ce^{-kt})\]
+            <div class="equation-info">
+                Donde: H = altura máxima, h = altura actual, t = tiempo en años<br>
+                k = constante de crecimiento calculada, C = factor basado en la altura inicial
+            </div>
+        </div>
+
+        <div class="parameters">
+            <div class="parameter-group">
+                <label for="maxHeight">Altura máxima del árbol (metros):</label>
+                <input type="number" id="maxHeight" value="30" min="1" max="100" step="0.1">
+            </div>
+            <div class="parameter-group">
+                <label for="initialHeight">Altura inicial del árbol (metros):</label>
+                <input type="number" id="initialHeight" value="1" min="0.1" step="0.1">
+            </div>
+            <div class="parameter-group">
+                <label for="growthPerYear">Crecimiento anual del árbol (metros/año):</label>
+                <input type="number" id="growthPerYear" value="0.5" min="0.01" step="0.01">
+            </div>
+            <div class="parameter-group">
+                <label for="years">Años transcurridos:</label>
+                <input type="number" id="years" value="3" min="0" max="100" step="1">
+            </div>
+        </div>
+
+        <div class="scene">
+            <video id="growthVideo" width="100%" height="auto">
+                <source src="../video/arbolTime.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>        
+
+        <div class="stats">
+            <div class="growth-results">
+                <div id="initialHeightDisplay">Altura inicial: 0.00 metros</div>
+                <div id="finalHeightDisplay">Altura final: 0.00 metros</div>
+                <div id="growthDisplay">Crecimiento total: 0.00 metros</div>
+            </div>
+            <div class="progress-indicator">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="simulateGrowth()">Simular Crecimiento</button>
+            <button onclick="resetSimulation()">Reiniciar</button>
+        </div>
+    </div>
+    <footer>
+        <div class="back-button-container">
+            <button onclick="window.location.href = 'Inicial.html';" class="back-button">Regresar a Inicio</button>
+        </div>
+    </footer>
+
+    <script src="../js/timelaps.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Growth Simulation</title>
+    <link rel="stylesheet" href="../css/3D.css">
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="controls">
+        <h2>Controles del Árbol</h2>
+        <label for="initialHeight">Altura inicial del árbol:</label>
+        <input type="range" id="initialHeight" min="1" max="10" step="0.1" value="2">
+        <span id="initial-height-value">2</span>
+        <br>
+        <label for="H">Altura final (H):</label>
+        <input type="range" id="H" min="5" max="50" step="0.1" value="15">
+        <span id="H-value">15</span>
+        <br>
+        <label for="k">Factor de crecimiento (k):</label>
+        <input type="range" id="k" min="0.1" max="2" step="0.1" value="0.5">
+        <span id="k-value">0.5</span>
+        <br>
+        <button id="start-button">Iniciar Simulación</button>
+        <button id="pause-button">Pausar</button>
+        <button id="reset-button">Reiniciar</button>
+        <button onclick="window.location.href = 'Inicial.html';" class="back-button">Regresar a Inicio</button>
+    </div>
+
+    <div id="info-panel">
+        <div>
+            Altura del árbol: <span id="tree-height">0.00</span> metros
+        </div>
+        <div>
+            Años transcurridos: <span id="years-passed">0</span> años
+        </div>
+    </div>
+
+    <!-- Cargando los scripts de three.js y OrbitControls desde el CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="../js/3D.js"></script>
+</body>
+</html>

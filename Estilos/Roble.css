@@ -58,35 +58,35 @@ section {
 
 /* Especificar las imágenes de fondo para cada sección */
 .sec1::before {
-    background-image: url('/img/Roble0.png');
+    background-image: url('../img/Roble0.png');
 }
 
 .sec2::before {
-    background-image: url('/img/Roble1.png');
+    background-image: url('../img/Roble1.png');
 }
 
 .sec3::before {
-    background-image: url('/img/Roble2.png');
+    background-image: url('../img/Roble2.png');
 }
 
 .sec4::before {
-    background-image: url('/img/Roble3.png');
+    background-image: url('../img/Roble3.png');
 }
 
 .sec5::before {
-    background-image: url('/img/Roble4.png');
+    background-image: url('../img/Roble4.png');
 }
 
 .sec7::before {
-    background-image: url('/img/Roble6.png');
+    background-image: url('../img/Roble6.png');
 }
 
 .sec8::before {
-    background-image: url('/img/Roble7.png');
+    background-image: url('../img/Roble7.png');
 }
 
 .sec9::before {
-    background-image: url('/img/Roble8.png');
+    background-image: url('../img/Roble8.png');
 }
 
 
