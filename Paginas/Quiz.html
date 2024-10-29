@@ -3,51 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz</title>
+  <title>Quiz Aleatorio</title>
   <link rel="stylesheet" href="../Estilos/Quiz.css">
 </head>
 <body>
   <div class="quiz-container">
     <h1>Quiz</h1>
-    <div id="question1" class="question">
-      <p>Pregunta 1: Cuántos árboles se mostraron?</p>
-      <ul>
-        <li><input type="radio" name="question1" value="A"> A) 4</li>
-        <li><input type="radio" name="question1" value="B"> B) 5</li>
-        <li><input type="radio" name="question1" value="C"> C) 3</li>
-        <li><input type="radio" name="question1" value="D"> D) 6</li>
-      </ul>
-      <button class="verify-button" onclick="checkAnswer('question1')">Verificar</button>
+    <div id="question-container">
+      <p id="question-text"></p>
+      <div id="options-container"></div>
     </div>
-    <div id="question2" class="question locked">
-      <p>Pregunta 2: Cuáles árboles se mostraron?</p>
-      <ul>
-        <li><input type="radio" name="question2" value="A"> A) Pino, Roble, Sauces, Encinos</li>
-        <li><input type="radio" name="question2" value="B"> B) Roble, Secuoya, Pino, Abeto</li>
-        <li><input type="radio" name="question2" value="C"> C) Secuoya, Pino, Abeto, Nogales</li>
-        <li><input type="radio" name="question2" value="D"> D) Bonsai, Sauces, Roble, Abeto</li>
-      </ul>
-      <button class="verify-button" onclick="checkAnswer('question2')">Verificar</button>
-    </div>
-    <div id="question3" class="question locked">
-      <p>Pregunta 3: Que tipo de árbol no se observó?</p>
-      <ul>
-        <li><input type="radio" name="question3" value="A"> A) Roble</li>
-        <li><input type="radio" name="question3" value="B"> B) Abeto</li>
-        <li><input type="radio" name="question3" value="C"> C) Hyperion</li>
-        <li><input type="radio" name="question3" value="D"> D) Pino</li>
-      </ul>
-      <button class="verify-button" onclick="checkAnswer('question3')">Verificar</button>
-    </div>
-    <div id="result-modal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <p id="result-message"></p>
-      </div>
-    </div>
-    <button class="return-button" onclick="returnToHomePage()">Volver a la página inicial</button>
+    <button id="submit-btn" class="btn">Verificar</button>
+    <button id="shuffle-btn" class="btn secondary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shuffle-icon"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+      Mezclar Preguntas
+    </button>
   </div>
-  
-  <script src="/js/Quiz.js"></script>
+
+  <div id="dialog" class="dialog">
+    <div class="dialog-content">
+      <h2 id="dialog-title"></h2>
+      <p id="dialog-message"></p>
+    </div>
+  </div>
+  <footer>
+    <div class="back-button-container">
+        <button onclick="window.location.href = 'Inicial.html';" class="back-button">Regresar a Inicio</button>
+    </div>
+</footer>
+  <script src="../js/Quiz.js"></script>
 </body>
 </html>

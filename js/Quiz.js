@@ -1,56 +1,104 @@
-function checkAnswer(questionName) {
-    const options = document.getElementsByName(questionName);
-    let selectedOption;
-    let isOptionSelected = false;
-    for (let i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-            selectedOption = options[i].value;
-            isOptionSelected = true;
-            break;
-        }
+const questions = [
+    {
+      id: 1,
+      text: "¿Cuántos árboles se mostraron?",
+      options: ["4", "5", "3", "6"],
+      correctAnswer: "4"
+    },
+    {
+      id: 2,
+      text: "¿Cuáles árboles se mostraron?",
+      options: ["Pino, Roble, Sauces, Encinos", "Roble, Secuoya, Pino, Abeto", "Secuoya, Pino, Abeto, Nogales", "Bonsai, Sauces, Roble, Abeto"],
+      correctAnswer: "Roble, Secuoya, Pino, Abeto"
+    },
+    {
+      id: 3,
+      text: "¿Qué tipo de árbol no se observó?",
+      options: ["Roble", "Abeto", "Hyperion", "Pino"],
+      correctAnswer: "Hyperion"
+    },
+    {
+      id: 4,
+      text: "¿Cuál es el árbol más alto del mundo?",
+      options: ["Secuoya", "Eucalipto", "Pino", "Abeto"],
+      correctAnswer: "Secuoya"
+    },
+    {
+      id: 5,
+      text: "¿Qué árbol es conocido por su longevidad?",
+      options: ["Pino", "Roble", "Olivo", "Secuoya"],
+      correctAnswer: "Olivo"
     }
-    if (!isOptionSelected) {
-        alert("Por favor selecciona una respuesta");
-        return;
+  ];
+  
+  let currentQuestions = [];
+  let currentQuestionIndex = 0;
+  
+  const questionText = document.getElementById('question-text');
+  const optionsContainer = document.getElementById('options-container');
+  const submitBtn = document.getElementById('submit-btn');
+  const shuffleBtn = document.getElementById('shuffle-btn');
+  const dialog = document.getElementById('dialog');
+  const dialogTitle = document.getElementById('dialog-title');
+  const dialogMessage = document.getElementById('dialog-message');
+  
+  function shuffleQuestions() {
+    currentQuestions = [...questions].sort(() => Math.random() - 0.5);
+    currentQuestionIndex = 0;
+    displayQuestion();
+  }
+  
+  function displayQuestion() {
+    const question = currentQuestions[currentQuestionIndex];
+    questionText.textContent = `Pregunta ${currentQuestionIndex + 1}: ${question.text}`;
+    
+    optionsContainer.innerHTML = '';
+    question.options.forEach((option, index) => {
+      const optionElement = document.createElement('div');
+      optionElement.classList.add('option');
+      optionElement.innerHTML = `
+        <input type="radio" id="option${index}" name="answer" value="${option}">
+        <label for="option${index}">${option}</label>
+      `;
+      optionsContainer.appendChild(optionElement);
+    });
+  }
+  
+  function checkAnswer() {
+    const selectedOption = document.querySelector('input[name="answer"]:checked');
+    if (!selectedOption) {
+      showDialog('Error', 'Por favor selecciona una respuesta');
+      return;
     }
-
-    const questionNumber = parseInt(questionName.replace("question", ""));
-    let resultMessage;
-    let backgroundColor;
-    if ((questionNumber === 1 && selectedOption === "A") || 
-        (questionNumber === 2 && selectedOption === "B") || 
-        (questionNumber === 3 && selectedOption === "C")) {
-        resultMessage = "Felicidades, eres muy inteligente";
-        backgroundColor = "rgba(106, 194, 89, 0.7)"; // Color verde con transparencia
-        if (questionNumber < 3) {
-            unlockQuestion(questionNumber + 1); // Desbloquea la siguiente pregunta
-        }
+  
+    const currentQuestion = currentQuestions[currentQuestionIndex];
+    const isCorrect = selectedOption.value === currentQuestion.correctAnswer;
+    
+    if (isCorrect) {
+      showDialog('¡Correcto!', '¡Felicidades, eres muy inteligente!', 'correct');
+      if (currentQuestionIndex < currentQuestions.length - 1) {
+        setTimeout(() => {
+          currentQuestionIndex++;
+          displayQuestion();
+        }, 1500);
+      }
     } else {
-        resultMessage = "Respuesta Incorrecta";
-        backgroundColor = "rgba(239, 68, 68, 0.7)"; // Color rojo con transparencia
+      showDialog('Incorrecto', 'Respuesta Incorrecta', 'incorrect');
     }
-    showModal(resultMessage, backgroundColor);
-}
-
-function unlockQuestion(questionNumber) {
-    const nextQuestion = document.getElementById(`question${questionNumber}`);
-    nextQuestion.classList.remove('locked');
-}
-
-function showModal(message, backgroundColor) {
-    const modal = document.getElementById("result-modal");
-    const resultMessageElement = document.getElementById("result-message");
-    resultMessageElement.textContent = message;
-    modal.style.backgroundColor = backgroundColor; // Cambia el color de fondo del modal
-    modal.style.display = "block";
-}
-
-function closeModal() {
-    const modal = document.getElementById("result-modal");
-    modal.style.display = "none";
-    modal.style.backgroundColor = "transparent"; // Restablece el color de fondo del modal
-}
-
-function returnToHomePage() {
-    window.location.href = "/Paginas/Inicial.html";
-}
+  }
+  
+  function showDialog(title, message, className) {
+    dialogTitle.textContent = title;
+    dialogMessage.textContent = message;
+    dialog.className = `dialog ${className}`;
+    dialog.style.display = 'block';
+    setTimeout(() => {
+      dialog.style.display = 'none';
+    }, 1500);
+  }
+  
+  submitBtn.addEventListener('click', checkAnswer);
+  shuffleBtn.addEventListener('click', shuffleQuestions);
+  
+  // Initialize the quiz
+  shuffleQuestions();
