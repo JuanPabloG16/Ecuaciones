@@ -38,6 +38,14 @@ header {
     margin-bottom: 3rem;
 }
 
+.logo-concurso {
+    max-width: 150px; /* Ajusta el tamaño máximo del logo */
+    height: auto; /* Mantén las proporciones de la imagen */
+    display: block; /* Asegura que se muestre como un bloque */
+    margin: 0 auto 1rem auto; /* Centra la imagen y añade un espacio debajo */
+}
+
+
 h1 {
     font-family: var(--title-font);
     font-size: clamp(1.5rem, 5vw, 2.5rem); /* Tamaño adaptable */
@@ -186,6 +194,10 @@ footer {
         font-size: 1.75rem;
     }
 
+    .logo-concurso {
+        max-width: 80px; /* Reducir el tamaño del logo en pantallas pequeñas */
+    }
+
     .container {
         padding: 1rem; /* Reducir el padding en pantallas pequeñas */
     }
@@ -220,6 +232,10 @@ footer {
 
     .container {
         padding: 0.5rem; /* Reducir aún más el padding */
+    }
+
+    .logo-concurso {
+        max-width: 60px; /* Reducir aún más el tamaño en pantallas muy pequeñas */
     }
 
     .more-info {

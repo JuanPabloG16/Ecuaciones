@@ -13,9 +13,9 @@ const questions = [
     },
     {
       id: 3,
-      text: "¿Qué tipo de árbol no se observó?",
-      options: ["Roble", "Abeto", "Hyperion", "Pino"],
-      correctAnswer: "Hyperion"
+      text: "¿Qué representa el ´timelapse´ en el contexto del proyecto de crecimiento arbóreo?",
+      options: ["Un método para acelerar el crecimiento de los árboles", "Una visualización rápida del proceso de crecimiento de los árboles a lo largo del tiempo", "Una técnica para reforestar áreas urbanas", "Una animación de cómo plantar árboles"],
+      correctAnswer: "Una visualización rápida del proceso de crecimiento de los árboles a lo largo del tiempo"
     },
     {
       id: 4,
@@ -25,9 +25,9 @@ const questions = [
     },
     {
       id: 5,
-      text: "¿Qué árbol es conocido por su longevidad?",
-      options: ["Pino", "Roble", "Olivo", "Secuoya"],
-      correctAnswer: "Olivo"
+      text: "¿Qué tecnología se utiliza para visualizar el crecimiento arból en 3D en el proyecto?",
+      options: ["WebGL", "Three.js", "Realidad Aumentada", "Timelapse"],
+      correctAnswer: "Three.js"
     }
   ];
   
